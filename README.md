@@ -1,17 +1,15 @@
 # PopViewObject
-第一版，用法很简单。只需要把PopViewObject一个实例设置成变量，然后把Click方法里的代码拷贝到你所要的位置。然后传入相应的参数即可。
 
-下一个版本会根据点击点弹出view
+1初始化：第二版精简了初始化方法，方便使用。所需参数【界面参数：弹出点， 弹出视图的宽和高，尖角的宽和高； 内容数据：标题数组和icon数组，其中icon数组可为空，参数cornerRadius为Bool值，YES和NO效果一样，内部没做处理，打算用来做是否圆角的】
 
-- (void)buttonClick:(UIButton *)sender {
+2，调用如下 ：- (IBAction)click:(UIButton *)sender {
 
-    _popViewObj = [[PopViewObject alloc] initPopViewWithContainerView:self.view rectangleFrame:CGRectMake(self.view.frame.size.width - 185, 64, 180, 200) arrowLength:30.f arrowHeight:30.f contactLeftX:140.f arrowDirection:PopviewDirectionUp titleArray:@[@"飞飞", @"么么", @"哒哒", @"哈哈", @"嘿嘿", @"吼吼", @"嘻嘻", @"呵呵"] imagesArray:nil cornerRadius:YES];
+    _popViewObj = [[PopViewObject alloc] initPopViewWithStartPoint:sender.center rectangleWidth:100 rectangleHeight:200 popDirection:PopviewDirectionUp arrowWidth:20 arrowHeight:20 titleArray:@[@"AAAA", @"BBBB", @"CCCC", @"DDDD",   @"EEEE", @"FFFF"] imagesArray:@[@"A1", @"A2", @"A3",@"A4", @"A5", @"A6"] cornerRadius:YES];
 
     __weak PopViewObject *pop = _popViewObj;
     
-    _popViewObj.selectItemBlock = ^(NSInteger row) {
-
-        NSLog(@"row = %ld", row);
-        [pop dismissPopviewToStartPosition:sender.center];
+    _popViewObj.selectItemBlock = ^(NSInteger row)  {
+    NSLog(@"row = %ld", row);
+    [pop dismissPopviewToStartPosition:sender.center];
     };
 }

@@ -25,36 +25,32 @@
     self.navigationItem.title = @"标题么么哒";
     self.view.backgroundColor = [UIColor cyanColor];
     
-//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"。。。" style:UIBarButtonItemStylePlain target:self action:@selector(buttonClick:)];
-    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 30)];
     [button setTitle:@"弹出" forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     [button addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
 }
 
 - (void)buttonClick:(UIButton *)sender {
     
-    _popViewObj = [[PopViewObject alloc] initPopViewWithContainerView:self.view rectangleFrame:CGRectMake(self.view.frame.size.width - 185, 64, 180, 200) arrowLength:30.f arrowHeight:30.f contactLeftX:140.f arrowDirection:PopviewDirectionUp titleArray:@[@"飞飞", @"么么", @"哒哒", @"哈哈", @"嘿嘿", @"吼吼", @"嘻嘻", @"呵呵"] imagesArray:nil cornerRadius:YES];
+    _popViewObj = [[PopViewObject alloc] initPopViewWithStartPoint:CGPointMake([UIScreen mainScreen].bounds.size.width - 50, 40) rectangleWidth:100 rectangleHeight:200 popDirection:PopviewDirectionDown arrowWidth:20 arrowHeight:20 titleArray:@[@"AAAA", @"BBBB", @"CCCC", @"DDDD", @"EEEE", @"FFFF"] imagesArray:@[@"A1", @"A2", @"A3",@"A4", @"A5", @"A6"] cornerRadius:YES];
     
     __weak PopViewObject *pop = _popViewObj;
-    
     _popViewObj.selectItemBlock = ^(NSInteger row) {
-        
         NSLog(@"row = %ld", row);
-        
-        [pop dismissPopviewToStartPosition:sender.center];
+        [pop dismissPopviewToStartPosition:CGPointMake([UIScreen mainScreen].bounds.size.width - 50, 40)];
     };
+    
 }
 
 - (IBAction)click:(UIButton *)sender {
-    _popViewObj = [[PopViewObject alloc] initPopViewWithContainerView:self.view rectangleFrame:CGRectMake(self.view.center.x - 90, self.view.frame.size.height - 200 - 215, 180, 200) arrowLength:30.f arrowHeight:30.f contactLeftX:75.f arrowDirection:PopviewDirectionDown titleArray:@[@"飞飞", @"么么", @"哒哒", @"哈哈", @"嘿嘿", @"吼吼", @"嘻嘻", @"呵呵"] imagesArray:nil cornerRadius:YES];
+    
+    _popViewObj = [[PopViewObject alloc] initPopViewWithStartPoint:sender.center rectangleWidth:100 rectangleHeight:200 popDirection:PopviewDirectionUp arrowWidth:20 arrowHeight:20 titleArray:@[@"AAAA", @"BBBB", @"CCCC", @"DDDD", @"EEEE", @"FFFF"] imagesArray:@[@"A1", @"A2", @"A3",@"A4", @"A5", @"A6"] cornerRadius:YES];
     
     __weak PopViewObject *pop = _popViewObj;
-    
     _popViewObj.selectItemBlock = ^(NSInteger row) {
-        
         NSLog(@"row = %ld", row);
-        
         [pop dismissPopviewToStartPosition:sender.center];
     };
 }
@@ -66,3 +62,4 @@
 
 
 @end
+
